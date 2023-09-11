@@ -9,14 +9,20 @@ import java.util.*
 class TodoService (val store: TodoPersistence) {
     fun findMessages(): List<Todo> = store.getAll()
     fun save(todoDTO : TodoDTO) = store.save(todoDTO.toTodo() )
-    fun find (id: String) : Todo? = store.find(id)
-    fun updateStatus (id: String, finished : Boolean ) = store.updateStatus(id, finished)
-    fun delete (id: String) = store.delete(id)
+    fun find (id: UUID) : Todo? = store.find(id)
+    fun updateStatus (id: UUID, finished : Boolean ) = store.updateStatus(id, finished)
+    fun delete (id: UUID) = store.delete(id)
 }
 
-data class Todo(val id: String, val title : String, val description: String, val finished: Boolean)
+data class Todo(
+    val id: UUID,
+    val title : String,
+    val description: String,
+    val finished: Boolean
+)
+
 fun TodoDTO.toTodo() =Todo(
-    id = UUID.randomUUID().toString(),
+    id = UUID.randomUUID(),
     title = title,
     description = description,
     finished = false

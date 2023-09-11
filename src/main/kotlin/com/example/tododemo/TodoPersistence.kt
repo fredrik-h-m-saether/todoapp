@@ -1,14 +1,15 @@
 package com.example.tododemo
 
 import org.springframework.stereotype.Repository
+import java.util.UUID
 
 
 interface TodoPersistence {
     fun save (todo : Todo)
     fun getAll () : List<Todo>
-    fun find (id: String) : Todo?
-    fun updateStatus (id: String, finished : Boolean )
-    fun delete (id: String)
+    fun find (id: UUID) : Todo?
+    fun updateStatus (id: UUID, finished : Boolean )
+    fun delete (id: UUID)
 }
 
 /*
@@ -52,9 +53,9 @@ class TodoPersistenceMutableLocal: TodoPersistence {
 
     override fun getAll(): List<Todo> = local.toList()
 
-    override fun find(id: String): Todo? = local.find { e -> e.id == id}
+    override fun find(id: UUID): Todo? = local.find { e -> e.id == id}
 
-    override fun updateStatus(id: String, finished: Boolean) {
+    override fun updateStatus(id: UUID, finished: Boolean) {
         this.find(id)?.let { old ->
             this.delete(old.id)
             val new = Todo(old.id, old.title, old.description, finished)
@@ -62,7 +63,7 @@ class TodoPersistenceMutableLocal: TodoPersistence {
         }
     }
 
-    override fun delete(id: String) {
+    override fun delete(id: UUID) {
         local.removeIf { e -> e.id == id }
     }
 }

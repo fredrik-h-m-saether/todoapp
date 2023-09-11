@@ -27,16 +27,16 @@ class MessageController(val service: TodoService) {
     }
 
     @GetMapping("/find")
-    fun find(@RequestParam("id") id: String) = service.find(id) ?: "Item not found (id: $id)"
+    fun find(@RequestParam("id") id: UUID) = service.find(id) ?: "Item not found (id: $id)"
 
     @PostMapping("/delete")
-    fun delete(@RequestParam("id") id: String) : String {
+    fun delete(@RequestParam("id") id: UUID) : String {
         service.delete(id)
         return "Delete for $id sent"
     }
 
     @PostMapping("/markfinished")
-    fun markFinished(@RequestParam("id") id: String) {
+    fun markFinished(@RequestParam("id") id: UUID) {
         service.updateStatus(id, finished = true)
     }
     //fun index(@RequestParam("name") name: String) = "Hello, $name!"
