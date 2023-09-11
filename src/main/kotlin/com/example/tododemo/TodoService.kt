@@ -8,8 +8,8 @@ import java.util.*
 class TodoService(val store: TodoPersistence) {
     fun findMessages(): List<Todo> = store.getAll()
     fun save(todoDTO: TodoDTO) = store.save(todoDTO.toTodo())
+    //TODO: Is this the right place to convert DTO to domain object?
 
-    @Throws(TodoNotFoundException::class)
     fun find(id: UUID): Result<Todo> = store.find(id)
     fun updateStatus(id: UUID, finished: Boolean) = store.updateStatus(id, finished)
     fun delete(id: UUID) = store.delete(id)
