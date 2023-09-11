@@ -1,5 +1,5 @@
 ### Add new to list
-POST http://localhost:8080/new
+POST http://localhost:8080/todos
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Add nr 2 to list
-POST http://localhost:8080/new
+POST http://localhost:8080/todos
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 
 ### Get all the messages
-GET http://localhost:8080/
+GET http://localhost:8080/todos
 
 > {%
     client.test("Request executed successfully", function() {
@@ -29,11 +29,11 @@ GET http://localhost:8080/
 
 
 ### Find by id
-GET http://localhost:8080/find?id=88cf34d6-addf-4b71-ba3c-1ecb06bb11f3
-Accept: application/json
+GET http://localhost:8080/todos/5927204e-be22-42c1-ae3c-d36675454c2d
+
 
 ### Delete by
-POST http://localhost:8080/delete?id=88cf34d6-addf-4b71-ba3c-1ecb06bb11f3
+DELETE http://localhost:8080/todos/5927204e-be22-42c1-ae3c-d36675454c2d
 
 ### Mark as complete
-POST http://localhost:8080/markfinished?id=88cf34d6-addf-4b71-ba3c-1ecb06bb11f3
+PATCH http://localhost:8080/todos/markcomplete/5927204e-be22-42c1-ae3c-d36675454c2d

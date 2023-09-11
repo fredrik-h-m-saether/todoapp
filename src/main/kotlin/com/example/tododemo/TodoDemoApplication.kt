@@ -2,9 +2,9 @@ package com.example.tododemo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.stereotype.Repository
-import org.springframework.stereotype.Service
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 import java.util.*
 
 
@@ -17,33 +17,49 @@ fun main(args: Array<String>) {
 
 @RestController
 class MessageController(val service: TodoService) {
-    @GetMapping("/")
+    @GetMapping("/todos")
     fun index(): List<Todo> = service.findMessages()
 
-    @PostMapping("/new")
-    fun post(@RequestBody todoDTO: TodoDTO) : String {
-        service.save(todoDTO)
-        return "Save for ${todoDTO.title} sent"
-    }
+    @PostMapping("/todos")
+    fun post(@RequestBody todoDTO: TodoDTO) =
+        service
+            .save(todoDTO)
 
-    @GetMapping("/find")
-    fun find(@RequestParam("id") id: UUID) = service.find(id) ?: "Item not found (id: $id)"
 
-    @PostMapping("/delete")
-    fun delete(@RequestParam("id") id: UUID) : String {
-        service.delete(id)
-        return "Delete for $id sent"
-    }
+    @GetMapping("/todos/{id}")
+    fun find(@PathVariable("id") id: UUID) =
+        service
+            .find(id)
+            .fold(
+                onSuccess = { it },
+                onFailure = { todoNotFoundStatusResponse(id) }
+            )
 
-    @PostMapping("/markfinished")
-    fun markFinished(@RequestParam("id") id: UUID) {
-        service.updateStatus(id, finished = true)
-    }
-    //fun index(@RequestParam("name") name: String) = "Hello, $name!"
+    @DeleteMapping("/todos/{id}")
+    fun delete(@PathVariable("id") id: UUID) =
+        service
+            .delete(id)
+            .fold(
+                onSuccess = { },
+                onFailure = { todoNotFoundStatusResponse(id) }
+            )
+
+    @PatchMapping("/todos/markcomplete/{id}")
+    fun markComplete(@PathVariable("id") id: UUID) =
+        service
+            .updateStatus(id, finished = true)
+            .fold(
+                onSuccess = { },
+                onFailure = { todoNotFoundStatusResponse(id) }
+            )
+
+    fun todoNotFoundStatusResponse(uuid: UUID) = ResponseStatusException(
+        HttpStatus.NOT_FOUND,
+        "Todo not found, maybe you got the wrong id? (received id=$uuid)"
+    )
+
 }
 
 
-
-
-data class TodoDTO(val title : String, val description: String)
+data class TodoDTO(val title: String, val description: String)
 
