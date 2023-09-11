@@ -37,8 +37,10 @@ Starte med et enkelt API, og etterhvert legge på en database og litt slik
 - [ ] Split i 3 filer: Fasade, service, persistance
 - [ ] Skriv 1 test...!
 - [ ] Lagre i database
+- [ ] Oppdater API itl OpenApi ACE standard
+- [ ] Legg til noe ekstra funksjonalitet
+- [ ] Status er bool, endre til enum ["DONE", "NOT STARTED", osv.]?
 
 
 ## Spør: 
-- [ ] Status er bool, endre til ["DONE", "NOT STARTED", osv.]?
 

@@ -2,14 +2,10 @@ package com.example.tododemo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.RequestParam
-import java.util.UUID
+import org.springframework.web.bind.annotation.*
+import java.util.*
 
 
 @SpringBootApplication
@@ -48,17 +44,17 @@ class MessageController(val service: TodoService) {
 
 
 @Service
-class TodoService (val store: TodoPersistenceMutableLocal) {
+class TodoService (val store: TodoPersistence) {
     fun findMessages(): List<Todo> = store.getAll()
-    fun save(todoDTO : TodoDTO) = store.save(todoDTO )
+    fun save(todoDTO : TodoDTO) = store.save(todoDTO.toTodo() )
     fun find (id: String) : Todo? = store.find(id)
     fun updateStatus (id: String, finished : Boolean ) = store.updateStatus(id, finished)
     fun delete (id: String) = store.delete(id)
 }
 
-@Service
+
 interface TodoPersistence {
-    fun save (todoDTO : TodoDTO)
+    fun save (todo : Todo)
     fun getAll () : List<Todo>
     fun find (id: String) : Todo?
     fun updateStatus (id: String, finished : Boolean )
@@ -95,7 +91,7 @@ fun TodoDTO.toTodo() =Todo(
     finished = false
 )
 
-@Service
+@Repository
 class TodoPersistenceMutableLocal: TodoPersistence {
     val local = mutableListOf<Todo>()
 
@@ -103,10 +99,10 @@ class TodoPersistenceMutableLocal: TodoPersistence {
         local.add(todo)
     }
 
-    override fun save(todoDTO: TodoDTO) {
+    override fun save(todo: Todo) {
         // TODO : DTO should never be in persistence layer?
 
-        saveToList(todoDTO.toTodo() )
+        saveToList(todo )
     }
 
     override fun getAll(): List<Todo> = local.toList()
@@ -121,7 +117,9 @@ class TodoPersistenceMutableLocal: TodoPersistence {
         }
     }
 
-    override fun delete(id: String) = local.removeIf { e -> e.id == id }
+    override fun delete(id: String) {
+        local.removeIf { e -> e.id == id }
+    }
 }
 
 data class TodoDTO(val title : String, val description: String)
