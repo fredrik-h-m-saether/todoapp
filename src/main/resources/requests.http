@@ -17,7 +17,6 @@ Content-Type: application/json
 }
 
 
-
 ### Get all the messages
 GET http://localhost:8080/
 
@@ -30,11 +29,11 @@ GET http://localhost:8080/
 
 
 ### Find by id
-GET http://localhost:8080/find?id=883e3d13-5934-4cf8-8cf6-c280a13866a8
+GET http://localhost:8080/find?id=88cf34d6-addf-4b71-ba3c-1ecb06bb11f3
 Accept: application/json
 
 ### Delete by
-POST http://localhost:8080/delete?id=883e3d13-5934-4cf8-8cf6-c280a13866a8
+POST http://localhost:8080/delete?id=88cf34d6-addf-4b71-ba3c-1ecb06bb11f3
 
 ### Mark as complete
-POST http://localhost:8080/markfinished?id=883e3d13-5934-4cf8-8cf6-c280a13866a8
+POST http://localhost:8080/markfinished?id=88cf34d6-addf-4b71-ba3c-1ecb06bb11f3
