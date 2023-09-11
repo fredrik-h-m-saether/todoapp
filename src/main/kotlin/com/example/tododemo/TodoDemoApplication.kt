@@ -48,7 +48,7 @@ class MessageController(val service: TodoService) {
 
 
 @Service
-class TodoService (val store: TodoPersistence) {
+class TodoService (val store: TodoPersistenceMutableLocal) {
     fun findMessages(): List<Todo> = store.getAll()
     fun save(todoDTO : TodoDTO) = store.save(todoDTO )
     fun find (id: String) : Todo? = store.find(id)
@@ -88,6 +88,13 @@ class TodoPersistenceDB (val db: JdbcTemplate): TodoPersistence {
 }
 */
 
+fun TodoDTO.toTodo() =Todo(
+    id = UUID.randomUUID().toString(),
+    title = title,
+    description = description,
+    finished = false
+)
+
 @Service
 class TodoPersistenceMutableLocal: TodoPersistence {
     val local = mutableListOf<Todo>()
@@ -98,13 +105,8 @@ class TodoPersistenceMutableLocal: TodoPersistence {
 
     override fun save(todoDTO: TodoDTO) {
         // TODO : DTO should never be in persistence layer?
-        val todo = Todo(
-            id = UUID.randomUUID().toString(),
-            title = todoDTO.title,
-            description = todoDTO.description,
-            finished = false
-        )
-        saveToList(todo)
+
+        saveToList(todoDTO.toTodo() )
     }
 
     override fun getAll(): List<Todo> = local.toList()
@@ -112,21 +114,16 @@ class TodoPersistenceMutableLocal: TodoPersistence {
     override fun find(id: String): Todo? = local.find { e -> e.id == id}
 
     override fun updateStatus(id: String, finished: Boolean) {
-        val old = this.find(id) ?: return
-
-        assert(old != null)
-        this.delete(id)
-        val new = Todo(old.id, old.title, old.description, finished)
-        saveToList(new)
+        this.find(id)?.let { old ->
+            this.delete(old.id)
+            val new = Todo(old.id, old.title, old.description, finished)
+            saveToList(new)
+        }
     }
 
-    override fun delete(id: String) {
-        local.removeIf { e -> e.id == id }
-    }
-
+    override fun delete(id: String) = local.removeIf { e -> e.id == id }
 }
 
-data class Message(val id: String?, val text: String)
 data class TodoDTO(val title : String, val description: String)
 data class Todo(val id: String, val title : String, val description: String, val finished: Boolean)
 

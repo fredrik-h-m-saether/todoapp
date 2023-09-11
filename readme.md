@@ -25,11 +25,11 @@ Starte med et enkelt API, og etterhvert legge på en database og litt slik
 
 
 ## Fremgang: 
-- [X] Liste alle TODO (GET http://localhost:8080/)
-- [X] Opprette nye TODO objekter ( POST http://localhost:8080/new med JSON {"title", "description") )
-- [X] Slette TODO (POST http://localhost:8080/delete?id=...)
-- [X] Oppdatere TODO (POST http://localhost:8080/markfinished?id=...)
-- [X] Finne enkelt TODO (POST http://localhost:8080/find?id=...)
+- [X] Liste alle todo (GET http://localhost:8080/)
+- [X] Opprette nye todo objekter ( POST http://localhost:8080/new med JSON {"title", "description") )
+- [X] Slette todo (POST http://localhost:8080/delete?id=...)
+- [X] Oppdatere todo (POST http://localhost:8080/markfinished?id=...)
+- [X] Finne enkelt todo (POST http://localhost:8080/find?id=...)
 - [ ] Dokumenter API i bedre rammeverk
 - [ ] Lag automatiske tester av API
 - [ ] Endre navn på lokal database til LocalDAO, eller LocalRepository
