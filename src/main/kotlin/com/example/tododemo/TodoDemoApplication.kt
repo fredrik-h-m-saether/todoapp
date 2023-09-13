@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 }
 
 @RestController
-class MessageController(val service: TodoService) {
+class TodoWebController(val service: TodoService) {
     @GetMapping("/todos")
     fun index(): List<Todo> = service.findMessages()
 
