@@ -24,13 +24,14 @@ class TodoApplicationTests {
 
     val someUuid: UUID = UUID.fromString("5927204e-be22-42c1-ae3c-d36675454c2d")
     val todo: Todo = mockk()
+
     @Test
     fun contextLoads() {
         assert(true)
     }
 
     @Test
-    fun whenFindTodoById_thenReturnThatTodo() {
+    fun `Service passes find(id) calls to repo`() {
         //given
         val expected: Result<Todo> = Result.success(todo)
         every { todoRepository.find(someUuid) } returns expected
@@ -41,7 +42,5 @@ class TodoApplicationTests {
         //then
         verify(exactly = 1) { todoRepository.find(someUuid) }
         assertThat(result).isEqualTo(expected)
-        // result.getOrNull() is because mockk and Result<> valueclasses does noe cooperate
-        // https://github.com/mockk/mockk/issues/645
     }
 }
