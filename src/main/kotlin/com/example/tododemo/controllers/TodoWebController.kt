@@ -1,7 +1,7 @@
 package com.example.tododemo.controllers
 
-import com.example.tododemo.Todo
 import com.example.tododemo.TodoService
+import com.example.tododemo.models.Todo
 import com.example.tododemo.models.TodoDTO
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

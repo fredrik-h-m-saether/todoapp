@@ -1,3 +1,14 @@
 package com.example.tododemo.models
 
-data class TodoDTO(val title: String, val description: String)
+import java.util.*
+
+data class TodoDTO(val title: String, val description: String) {
+
+    fun toTodo() = Todo(
+        id = UUID.randomUUID(),
+        title = title,
+        description = description,
+        finished = false
+    )
+}
+

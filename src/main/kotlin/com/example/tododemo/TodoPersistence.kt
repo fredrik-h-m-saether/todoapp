@@ -1,5 +1,6 @@
 package com.example.tododemo
 
+import com.example.tododemo.models.Todo
 import org.springframework.stereotype.Repository
 import java.util.*
 
@@ -11,6 +12,8 @@ interface TodoPersistence {
     fun updateStatus(id: UUID, finished: Boolean): Result<Unit>
     fun delete(id: UUID): Result<Unit>
 }
+
+
 
 /*
 class TodoPersistenceDB (val db: JdbcTemplate): TodoPersistence {
