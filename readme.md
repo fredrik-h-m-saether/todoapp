@@ -42,5 +42,12 @@ Starte med et enkelt API, og etterhvert legge på en database og litt slik
 - [ ] Status er bool, endre til enum ["DONE", "NOT STARTED", osv.]?
 
 
+
+## Eksempler
+- https://github.com/tietoevryfs/ace-pet-demo/blob/main/src/main/kotlin/com/github/atomfinger/demo/repository/PetRepository.kt
+- https://github.com/tietoevryfs/lmt-core/blob/master/lmt-core-srv-test/src/test/kotlin/com/tietoevry/banking/ace/lmt/core/srv/test/billingaccountlimit/BillingAccountLimitTest.kt
+
+
+
 ## Spør: 
 
