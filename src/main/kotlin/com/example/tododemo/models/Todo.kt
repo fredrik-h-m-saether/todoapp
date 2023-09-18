@@ -7,10 +7,17 @@ import java.util.*
 
 
 @Entity
-data class Todo(
+class Todo {
     @Id
-    val id: UUID,
-    val title: String,
-    val description: String,
-    val finished: Boolean
-)
+    lateinit var id: UUID
+    lateinit var title: String
+    lateinit var description: String
+    var completed: Boolean = false
+
+    fun copy() = Todo().apply {
+        id = id
+        title = title
+        description = description
+        completed = completed
+    }
+}

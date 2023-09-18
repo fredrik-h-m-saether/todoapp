@@ -1,6 +1,6 @@
 package com.example.tododemo.controllers
 
-import com.example.tododemo.TodoService
+import com.example.tododemo.service.TodoService
 import com.example.tododemo.models.Todo
 import com.example.tododemo.models.TodoDTO
 import org.springframework.http.HttpStatus
@@ -32,19 +32,11 @@ class TodoWebController(val service: TodoService) {
     fun delete(@PathVariable("id") id: UUID) =
         service
             .delete(id)
-            .fold(
-                onSuccess = { },
-                onFailure = { todoNotFoundStatusResponse(id) }
-            )
 
     @PatchMapping("/todos/markcomplete/{id}")
     fun markComplete(@PathVariable("id") id: UUID) =
         service
             .updateStatus(id, finished = true)
-            .fold(
-                onSuccess = { },
-                onFailure = { todoNotFoundStatusResponse(id) }
-            )
 
     fun todoNotFoundStatusResponse(uuid: UUID) = ResponseStatusException(
         HttpStatus.NOT_FOUND,

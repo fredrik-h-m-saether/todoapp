@@ -4,11 +4,11 @@ import java.util.*
 
 data class TodoDTO(val title: String, val description: String) {
 
-    fun toTodo() = Todo(
-        id = UUID.randomUUID(),
-        title = title,
-        description = description,
-        finished = false
-    )
+    fun toTodo() = Todo().apply {
+        id = UUID.randomUUID()
+        title = title
+        description = description
+        completed = false
+    }
 }
 

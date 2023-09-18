@@ -1,5 +1,7 @@
 package com.example.tododemo
 
+import com.example.tododemo.repository.TodoPersistence
+import com.example.tododemo.service.TodoService
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
