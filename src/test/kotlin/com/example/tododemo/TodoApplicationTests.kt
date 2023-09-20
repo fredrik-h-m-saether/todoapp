@@ -1,6 +1,9 @@
 package com.example.tododemo
 
-import com.example.tododemo.repository.TodoPersistence
+import com.example.tododemo.models.Todo
+import com.example.tododemo.repository.TodoJpaRepository
+import com.example.tododemo.repository.TodoRepository
+import com.example.tododemo.repository.TodoRepositoryDBImpl
 import com.example.tododemo.service.TodoService
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
@@ -17,11 +20,12 @@ import java.util.*
 @ExtendWith(MockKExtension::class)
 class TodoApplicationTests {
 
+    @MockK
+    lateinit var todoRepository: TodoRepository
+
     @InjectMockKs
     lateinit var todoService: TodoService
 
-    @MockK
-    lateinit var todoRepository: TodoPersistence
 
     val someUuid: UUID = UUID.fromString("5927204e-be22-42c1-ae3c-d36675454c2d")
     val todo: Todo = mockk()
@@ -32,9 +36,9 @@ class TodoApplicationTests {
     }
 
     @Test
-    fun `Service passes find(id) calls to repo`() {
+    fun `When service find(id) calls is called, passes call to repo`() {
         //given
-        val expected: Result<Todo> = Result.success(todo)
+        val expected = todo
         every { todoRepository.find(someUuid) } returns expected
 
         //when

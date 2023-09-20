@@ -2,7 +2,7 @@ package com.example.tododemo.models
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
-import org.springframework.context.annotation.Primary
+import org.springframework.data.crossstore.ChangeSetPersister
 import java.util.*
 
 
@@ -14,10 +14,18 @@ class Todo {
     lateinit var description: String
     var completed: Boolean = false
 
-    fun copy() = Todo().apply {
-        id = id
-        title = title
-        description = description
-        completed = completed
+    fun copy() = Todo().let {
+        it.id = id
+        it.title = title
+        it.description = description
+        it.completed = completed
+        it
     }
 }
+
+fun Todo?.toResult(): Result<Todo> {
+    this ?: return Result.failure(ChangeSetPersister.NotFoundException())
+    return Result.success(this)
+}
+
+

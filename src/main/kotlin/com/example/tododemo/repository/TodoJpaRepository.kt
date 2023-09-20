@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface TodoDBRepository : JpaRepository<Todo, UUID> {
-
+interface TodoJpaRepository : JpaRepository<Todo, UUID> {
 
 }
