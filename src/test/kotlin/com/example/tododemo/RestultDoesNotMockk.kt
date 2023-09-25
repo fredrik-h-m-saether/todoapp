@@ -14,6 +14,7 @@ import java.util.*
 @ExtendWith(MockKExtension::class)
 class ResultDoesNotMockk {
 
+    // FIXED ( changed mockk dependency)
     @Test
     fun simpleResultMockkTest() {
         //give

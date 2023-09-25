@@ -3,7 +3,7 @@
 **Oppdragsgiver:** John Mikael Lindbakk
 **Produkteier:** Fredrik H. M. Sæther
 
-### Oppdrag
+### Oppgave
 **Beskrivelse:**
 (Hentet fra slack)
 Som nevnt skal dere lage et TODO api. Her må man kunne liste ut sine TODOs, opprette TODOs og Slette dem. Man må også kunne markere oppgaver som gjennomført. Man skal også kunne hente ut en spesifikk todo.
@@ -26,28 +26,32 @@ Starte med et enkelt API, og etterhvert legge på en database og litt slik
 
 ## Fremgang: 
 - [X] Liste alle todo (GET http://localhost:8080/)
-- [X] Opprette nye todo objekter ( POST http://localhost:8080/new med JSON {"title", "description") )
+- [X] Opprette nye todo objekter ( POST http://localhost:8080/ med JSON {"title", "description") )
 - [X] Slette todo (POST http://localhost:8080/delete?id=...)
 - [X] Oppdatere todo (POST http://localhost:8080/markfinished?id=...)
 - [X] Finne enkelt todo (POST http://localhost:8080/find?id=...)
 - [ ] Dokumenter API i bedre rammeverk
-- [ ] Lag automatiske tester av API
 - [ ] Endre navn på lokal database til LocalDAO, eller LocalRepository
-- [ ] Bekreft interface med kunden(John Mikael)
-- [ ] Split i 3 filer: Fasade, service, persistance
-- [ ] Skriv 1 test...!
-- [ ] Lagre i database
-- [ ] Oppdater API itl OpenApi ACE standard
-- [ ] Legg til noe ekstra funksjonalitet
+- [X] Bekreft interface med kunden(John Mikael)
+- [X] Split i 3 filer: Controller, service, repository
+- [X] Skriv 1 test
+- [ ] Skrive test for hvert lag
+- [X] Feilmelding når ikke ukjent ID er git
+- [X] Lagre i database
+- [X] Legg til noe ekstra funksjonalitet (tester?)
 - [ ] Status er bool, endre til enum ["DONE", "NOT STARTED", osv.]?
 
+### Backlog:
+- [ ] Lag automatiske tester av API
+- [ ] Oppdater API itl OpenApi ACE standard
 
 
-## Eksempler
+
+### Eksempler
 - https://github.com/tietoevryfs/ace-pet-demo/blob/main/src/main/kotlin/com/github/atomfinger/demo/repository/PetRepository.kt
 - https://github.com/tietoevryfs/lmt-core/blob/master/lmt-core-srv-test/src/test/kotlin/com/tietoevry/banking/ace/lmt/core/srv/test/billingaccountlimit/BillingAccountLimitTest.kt
 
 
 
-## Spør: 
+### Spør: 
 
