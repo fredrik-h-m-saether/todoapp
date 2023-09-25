@@ -31,7 +31,7 @@ Starte med et enkelt API, og etterhvert legge på en database og litt slik
 - [X] Oppdatere todo (POST http://localhost:8080/markfinished?id=...)
 - [X] Finne enkelt todo (POST http://localhost:8080/find?id=...)
 - [ ] Dokumenter API i bedre rammeverk
-- [ ] Endre navn på lokal database til LocalDAO, eller LocalRepository
+- [X] Endre navn på lokal database til LocalDAO, eller LocalRepository
 - [X] Bekreft interface med kunden(John Mikael)
 - [X] Split i 3 filer: Controller, service, repository
 - [X] Skriv 1 test
