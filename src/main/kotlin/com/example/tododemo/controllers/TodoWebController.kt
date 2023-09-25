@@ -1,11 +1,9 @@
 package com.example.tododemo.controllers
 
 import com.example.tododemo.models.Todo
-import com.example.tododemo.service.TodoService
 import com.example.tododemo.models.TodoDTO
-import com.example.tododemo.repository.TodoRepository
-import com.example.tododemo.repository.TodoRepository.*
-import com.example.tododemo.repository.TodoRepositoryDBImpl
+import com.example.tododemo.repository.TodoRepository.NotDeletedException
+import com.example.tododemo.service.TodoService
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -37,9 +35,9 @@ class TodoWebController(val service: TodoService) {
                 .delete(id)
                 .ok()
         } catch (e: NotFoundException) {
-            ResponseEntity.notFound().build<Unit>()
+            ResponseEntity.notFound().build()
         } catch (e: NotDeletedException) {
-            ResponseEntity.internalServerError().build<Unit>()
+            ResponseEntity.internalServerError().build()
         }
 
     @PatchMapping("/todos/markcomplete/{id}")
@@ -54,7 +52,7 @@ class TodoWebController(val service: TodoService) {
 
 
     fun Todo?.mapToResponseEntity(): ResponseEntity<Todo> {
-        this ?: return ResponseEntity.notFound().build<Todo>()
+        this ?: return ResponseEntity.notFound().build()
         return ResponseEntity.ok(this)
     }
 

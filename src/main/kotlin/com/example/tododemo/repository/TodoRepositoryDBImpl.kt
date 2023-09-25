@@ -1,9 +1,8 @@
 package com.example.tododemo.repository
 
 import com.example.tododemo.models.Todo
-import com.example.tododemo.models.toResult
-import com.example.tododemo.repository.TodoRepository.*
-import org.springframework.data.crossstore.ChangeSetPersister
+import com.example.tododemo.repository.TodoRepository.NotDeletedException
+import com.example.tododemo.repository.TodoRepository.NotUpdatedException
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional

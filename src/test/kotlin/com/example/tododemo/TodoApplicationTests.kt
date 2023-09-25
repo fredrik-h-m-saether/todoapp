@@ -1,9 +1,7 @@
 package com.example.tododemo
 
 import com.example.tododemo.models.Todo
-import com.example.tododemo.repository.TodoJpaRepository
 import com.example.tododemo.repository.TodoRepository
-import com.example.tododemo.repository.TodoRepositoryDBImpl
 import com.example.tododemo.service.TodoService
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
@@ -27,8 +25,8 @@ class TodoApplicationTests {
     lateinit var todoService: TodoService
 
 
-    val someUuid: UUID = UUID.fromString("5927204e-be22-42c1-ae3c-d36675454c2d")
-    val todo: Todo = mockk()
+    private val someUuid: UUID = UUID.fromString("5927204e-be22-42c1-ae3c-d36675454c2d")
+    private val todo: Todo = mockk()
 
     @Test
     fun contextLoads() {

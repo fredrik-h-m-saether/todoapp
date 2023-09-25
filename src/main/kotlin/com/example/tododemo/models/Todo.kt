@@ -2,7 +2,6 @@ package com.example.tododemo.models
 
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
-import org.springframework.data.crossstore.ChangeSetPersister
 import java.util.*
 
 
@@ -21,11 +20,6 @@ class Todo {
         it.completed = completed
         it
     }
-}
-
-fun Todo?.toResult(): Result<Todo> {
-    this ?: return Result.failure(ChangeSetPersister.NotFoundException())
-    return Result.success(this)
 }
 
 

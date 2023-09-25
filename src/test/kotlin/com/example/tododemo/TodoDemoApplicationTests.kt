@@ -26,8 +26,8 @@ class TodoDemoApplicationTests {
     @MockK
     lateinit var todoRepository: TodoRepository
 
-    val someUuid: UUID = UUID.fromString("5927204e-be22-42c1-ae3c-d36675454c2d")
-    val aTodo: Todo = mockk()
+    private val someUuid: UUID = UUID.fromString("5927204e-be22-42c1-ae3c-d36675454c2d")
+    private val aTodo: Todo = mockk()
 
     @Test
     fun contextLoads() {
@@ -36,7 +36,7 @@ class TodoDemoApplicationTests {
 
     @Test
     fun todoServiceGivesEmptyList() {
-        every { todoRepository.getAll() } returns listOf<Todo>()
+        every { todoRepository.getAll() } returns listOf()
         assert(todoService.findMessages().isEmpty())
     }
 

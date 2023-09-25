@@ -4,7 +4,6 @@ import com.example.tododemo.models.Todo
 import com.example.tododemo.models.TodoDTO
 import com.example.tododemo.repository.TodoRepository
 import com.example.tododemo.repository.TodoRepository.*
-import com.example.tododemo.repository.TodoRepositoryDBImpl
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional

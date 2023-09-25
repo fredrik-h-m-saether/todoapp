@@ -3,10 +3,6 @@ package com.example.tododemo
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
-import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
-import java.util.*
 
 
 @SpringBootApplication
