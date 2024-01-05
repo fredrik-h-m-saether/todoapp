@@ -1,0 +1,66 @@
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: new version number
+        required: false
+        default: ''
+
+jobs:
+  deployment:
+    runs-on: [ self-hosted, linux, finods-global ]
+    concurrency: g-d1
+    env:
+      MAVEN_OPTS: "--no-transfer-progress -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn"
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          overwrite-settings: false
+
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.5
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          token: "${{ github.token }}"
+
+      - name: Setup Oracle
+        id: oracle
+        uses: evryfs/helm-ephemeral-action@v0.2.4
+        with:
+          repo: https://nexus.finods.com/nexus/repository/evryfs-helm/
+          chart: fs-oracle-db-dev
+          args: "--wait --timeout 5m"
+
+      - name: Setup Git User
+        uses: fregante/setup-git-user@v1
+
+      - name: Set Next Version
+        run: >
+          mvn ace-versions:set-next
+          -DnewVersion=${{ github.event.inputs.version }}
+          ${MAVEN_OPTS}
+
+      - name: Get Version
+        id: versions
+        run: >
+          echo "version=$(mvn -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)"
+          >> $GITHUB_ENV
+
+      - name: Echo Version
+        run: echo ${{ env.version }}
+
+      - name: Build
+        run: >
+          mvn clean install
+          ${MAVEN_OPTS}
