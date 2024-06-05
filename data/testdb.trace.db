@@ -1,9 +1,0 @@
-2023-09-08 12:34:02 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MESSAGE" not found; SQL statement:
-select * from message [42102-214]
-2023-09-08 12:35:07 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MESSAGE" not found; SQL statement:
-select * from message [42102-214]
-2023-09-08 13:37:02 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MESSAGE" not found; SQL statement:
-select * from message [42102-214]
