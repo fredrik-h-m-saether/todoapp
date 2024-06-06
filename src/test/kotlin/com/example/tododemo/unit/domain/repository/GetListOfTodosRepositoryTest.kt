@@ -20,17 +20,16 @@ class GetListOfTodosRepositoryTest {
     }
 
     @Test
-    fun `given a Todo object, when accessing fields, assert success`() {
+    fun `given GetListOfTodosApiRepository, when calling findAllTodos, assert success`() {
         // given
-        val uuid = UUID.randomUUID()
-        val todo1 = Todo(uuid, "Todo1", "A todo item", Status.READY)
-        val todo2 = Todo(uuid, "Todo2", "A todo item", Status.IN_PROGRESS)
-        val todo3 = Todo(uuid, "Todo3", "A todo item", Status.DONE)
-        Mockito.`when`(getListOfTodosApiRepository.findAllTodos())
+        val todo1 = Todo(UUID.randomUUID(), "Todo1", "A todo item", Status.READY)
+        val todo2 = Todo(UUID.randomUUID(), "Todo2", "A todo item", Status.IN_PROGRESS)
+        val todo3 = Todo(UUID.randomUUID(), "Todo3", "A todo item", Status.DONE)
+        Mockito.`when`(getListOfTodosApiRepository.findAllTodosV1())
             .thenReturn(listOf(todo1, todo2, todo3))
 
         // when
-        val todos: List<Todo> = getListOfTodosApiRepository.findAllTodos()
+        val todos: List<Todo> = getListOfTodosApiRepository.findAllTodosV1()
 
         // then
         assertNotNull(todos)

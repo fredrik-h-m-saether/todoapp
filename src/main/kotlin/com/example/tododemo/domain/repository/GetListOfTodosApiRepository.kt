@@ -10,6 +10,8 @@ import com.example.tododemo.domain.model.Todo
  * @see <a href="https://github.com/fredrik-h-m-saether/todoapp">Github - TodoApp</a>
  * @see <a href="https://herbertograca.com/2017/11/16/explicit-architecture-01-ddd-hexagonal-onion-clean-cqrs-how-i-put-it-all-together/">
  *      DDD, Hexagonal, Onion, Clean and CQRS Architecture</a>
+ * @see <a href="https://www.baeldung.com/hexagonal-architecture-ddd-spring">
+ *      Organizing Layers Using Hexagonal Architecture, DDD and Spring</a>
  */
 interface GetListOfTodosApiRepository {
 
@@ -19,5 +21,5 @@ interface GetListOfTodosApiRepository {
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
-    fun findAllTodos(): List<Todo>
+    fun findAllTodosV1(): List<Todo>
 }
