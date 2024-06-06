@@ -1,4 +1,4 @@
-package com.example.tododemo.unit.domain
+package com.example.tododemo.unit.domain.model
 
 import com.example.tododemo.domain.enums.Status
 import com.example.tododemo.domain.model.Todo
