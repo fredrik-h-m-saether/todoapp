@@ -1,9 +1,9 @@
 package com.example.tododemo.application
 
-import com.example.tododemo.domain.model.Todo
+import com.example.tododemo.domain.model.TodoTask
 
 /**
- * An interface specifying the contract with the API-layer of this application.
+ * The Service class on the application layer orchestrates the use cases.
  *
  * @author Øystein Opedal
  * @since 0.0.1
@@ -13,13 +13,21 @@ import com.example.tododemo.domain.model.Todo
  * @see <a href="https://www.baeldung.com/hexagonal-architecture-ddd-spring">
  *      Organizing Layers Using Hexagonal Architecture, DDD and Spring</a>
  */
-interface GetListOfTodosApiService {
+interface TodoTaskService {
 
     /**
-     * Retrieves a list of TODOs.
+     * Retrieves a list of [TodoTask]-objects.
      *
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
-    fun getListOfTodosV1(): List<Todo>
+    fun getListOfTodoTasks(): List<TodoTask>
+
+    /**
+     * Creates a new [TodoTask]-object.
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun createNewTodoTask(title: String, description: String): TodoTask
 }

@@ -4,12 +4,12 @@ import com.example.tododemo.domain.enums.Status
 import java.util.UUID
 
 /**
- * The [TodoResponse] class is a Data Transfer Object (DTO) for serializing [TODO] to JSON
+ * The [TodoTaskResponse] class is a Data Transfer Object (DTO) for serializing the domain-model to JSON.
  *
- * @property id En unik ID for [TodoResponse].
- * @property title En tittel for [TodoResponse].
- * @property title En beskrivelse av [TodoResponse].
- * @property status En [Status] for [TodoResponse].
+ * @property id En unik ID for [TodoTaskResponse].
+ * @property title En tittel for [TodoTaskResponse].
+ * @property title En beskrivelse av [TodoTaskResponse].
+ * @property status En [Status] for [TodoTaskResponse].
  *
  * @author Øystein Opedal
  * @since 0.0.1
@@ -19,4 +19,4 @@ import java.util.UUID
  * @see <a href="https://www.baeldung.com/hexagonal-architecture-ddd-spring">
  *      Organizing Layers Using Hexagonal Architecture, DDD and Spring</a>
  */
-data class TodoResponse(val id: UUID, val title: String, val description: String, val status: Status)
+data class TodoTaskResponse(val id: UUID, val title: String, val description: String, val status: Status)

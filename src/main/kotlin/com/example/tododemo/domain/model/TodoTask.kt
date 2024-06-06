@@ -4,12 +4,12 @@ import com.example.tododemo.domain.enums.Status
 import java.util.UUID
 
 /**
- * The [Todo] class is the domain model of our application.
+ * The [TodoTask] class is the domain model of our application.
  *
- * @property id En unik ID for [Todo].
- * @property title En tittel for [Todo].
- * @property title En beskrivelse av [Todo].
- * @property status En [Status] for [Todo].
+ * @property id En unik ID for [TodoTask].
+ * @property title En tittel for [TodoTask].
+ * @property title En beskrivelse av [TodoTask].
+ * @property status En [Status] for [TodoTask].
  *
  * @author Øystein Opedal
  * @since 0.0.1
@@ -19,4 +19,4 @@ import java.util.UUID
  * @see <a href="https://www.baeldung.com/hexagonal-architecture-ddd-spring">
  *      Organizing Layers Using Hexagonal Architecture, DDD and Spring</a>
  */
-data class Todo(val id: UUID, val title: String, val description: String, val status: Status)
+data class TodoTask(val id: UUID, val title: String, val description: String, val status: Status)

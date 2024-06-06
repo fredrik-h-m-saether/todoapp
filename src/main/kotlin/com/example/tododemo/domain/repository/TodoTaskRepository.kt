@@ -1,9 +1,10 @@
 package com.example.tododemo.domain.repository
 
-import com.example.tododemo.domain.model.Todo
+import com.example.tododemo.domain.model.TodoTask
 
 /**
- * An interface specifying the contract between the Application-layer and the Infrastructure layer for data access.
+ * The Repository class acts as an abstraction between the Application-layer and the Infrastructure-layer, so that
+ * these layers are decoupled from each other.
  *
  * @author Øystein Opedal
  * @since 0.0.1
@@ -13,13 +14,21 @@ import com.example.tododemo.domain.model.Todo
  * @see <a href="https://www.baeldung.com/hexagonal-architecture-ddd-spring">
  *      Organizing Layers Using Hexagonal Architecture, DDD and Spring</a>
  */
-interface GetListOfTodosApiRepository {
+interface TodoTaskRepository {
 
     /**
-     * Retrieves a list of TODOs in the Infrastructure layer.
+     * Retrieves a list of [TodoTask]-objects from the Infrastructure layer.
      *
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
-    fun findAllTodosV1(): List<Todo>
+    fun findAll(): List<TodoTask>
+
+    /**
+     * Creates a new [TodoTask] in the Infrastructure layer.
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun create(todoTask: TodoTask): TodoTask
 }

@@ -1,10 +1,10 @@
-package com.example.tododemo
+package com.example.tododemo.unitintegration
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class TodoDemoApplicationTests {
+class TodoTaskApplicationTests {
 
     @Test
     fun contextLoads() {

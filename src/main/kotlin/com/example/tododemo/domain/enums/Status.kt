@@ -1,15 +1,18 @@
 package com.example.tododemo.domain.enums
 
-import com.example.tododemo.domain.model.Todo
-
 /**
- * Indicates the status of the [Todo] object.
+ * Indicates the status of the task. The status can be one of the following:
+ * <ul>
+ *   <li>CREATED</li>
+ *   <li>IN_PROGRESS</li>
+ *   <li>DONE</li>
+ * </ul>
  *
  * @author Øystein Opedal
  * @since 0.0.1
  */
 enum class Status {
-    READY,
+    CREATED,
     IN_PROGRESS,
     DONE
 }
