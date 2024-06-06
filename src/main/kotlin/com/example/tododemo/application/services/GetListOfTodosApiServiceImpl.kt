@@ -12,7 +12,8 @@ import com.example.tododemo.domain.repository.GetListOfTodosApiRepository
  *
  * @see <a href="https://www.baeldung.com/spring-component-repository-service">Spring Component, Repository, Service</a>
  */
-class GetListOfTodosApiServiceImpl(val getListOfTodosApiRepository: GetListOfTodosApiRepository) : GetListOfTodosApiService {
+class GetListOfTodosApiServiceImpl(private val getListOfTodosApiRepository: GetListOfTodosApiRepository)
+    : GetListOfTodosApiService {
 
     override fun getListOfTodosV1(): List<Todo> {
         return getListOfTodosApiRepository.findAllTodosV1()
