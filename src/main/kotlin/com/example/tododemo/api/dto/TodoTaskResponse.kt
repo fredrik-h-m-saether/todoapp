@@ -19,4 +19,4 @@ import java.util.UUID
  * @see <a href="https://www.baeldung.com/hexagonal-architecture-ddd-spring">
  *      Organizing Layers Using Hexagonal Architecture, DDD and Spring</a>
  */
-data class TodoTaskResponse(val id: UUID, val title: String, val description: String, val status: Status)
+data class TodoTaskResponse(val id: UUID, val title: String?, val description: String?, val status: Status)

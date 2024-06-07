@@ -1,6 +1,8 @@
 package com.example.tododemo.domain.repository
 
+import com.example.tododemo.domain.exceptions.TodoTaskNotFoundException
 import com.example.tododemo.domain.model.TodoTask
+import java.util.UUID
 
 /**
  * The Repository class acts as an abstraction between the Application-layer and the Infrastructure-layer, so that
@@ -17,7 +19,16 @@ import com.example.tododemo.domain.model.TodoTask
 interface TodoTaskRepository {
 
     /**
-     * Retrieves a list of [TodoTask]-objects from the Infrastructure layer.
+     * Checks if the [TodoTask]-object associated by [id] exists.
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    @Deprecated(message = "To be removed in a future release.")
+    fun checkIfExists(id: UUID): Boolean
+
+    /**
+     * Retrieves a list of [TodoTask]-objects.
      *
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
@@ -25,10 +36,35 @@ interface TodoTaskRepository {
     fun findAll(): List<TodoTask>
 
     /**
-     * Creates a new [TodoTask] in the Infrastructure layer.
+     * Retrieves a single [TodoTask]-object associated by [id].
+     *
+     * @throws TodoTaskNotFoundException if the [TodoTask]-object associated by [id] is not found.
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun findById(id: UUID): TodoTask?
+
+    /**
+     * Creates a new [TodoTask].
      *
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
     fun create(todoTask: TodoTask): TodoTask
+
+    /**
+     * Updates an existing [TodoTask] associated by [id].
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun update(id: UUID, todoTask: TodoTask): TodoTask
+
+    /**
+     * Deletes an existing [TodoTask] associated by [id].
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun delete(id: UUID, todoTask: TodoTask): TodoTask
 }

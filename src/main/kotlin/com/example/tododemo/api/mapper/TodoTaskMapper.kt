@@ -16,7 +16,7 @@ class TodoTaskMapper {
         /**
          * Maps a given [TodoTask]-object to a TodoResponse-object.
          */
-        fun domainToTodoResponse(domain: TodoTask): TodoTaskResponse {
+        fun domainToTodoTaskResponse(domain: TodoTask): TodoTaskResponse {
             return TodoTaskResponse(domain.id, domain.title, domain.description, domain.status)
         }
     }

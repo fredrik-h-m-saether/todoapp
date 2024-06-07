@@ -3,6 +3,7 @@ package com.example.tododemo.api
 import com.example.tododemo.api.dto.TodoTaskRequest
 import com.example.tododemo.api.dto.TodoTaskResponse
 import com.example.tododemo.domain.model.TodoTask
+import java.util.*
 
 /**
  * An interface specifying the contract between the application and the consumer of the API.
@@ -16,20 +17,42 @@ import com.example.tododemo.domain.model.TodoTask
 interface TodoTaskController {
 
     /**
-     * Retrieves a list of [TodoTask]-objects from the Application-layer and maps the elements to
-     * [TodoTaskResponse]-objects before returning.
+     * Retrieves a list of [TodoTaskResponse]-objects.
      *
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
-    fun getListOfTodoTasks(): List<TodoTaskResponse>
+    fun getAllTodoTasks(): List<TodoTaskResponse>
 
     /**
-     * Takes a [TodoTaskRequest] as parameter and calls the service class in the Application-layer for creating a new
-     * [TodoTask]-object. This object is then mapped to a [TodoTaskResponse]-object before returning.
+     * Takes an [id] as parameter and deletes an existing [TodoTask]-object associated by the id.
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun getTodoTask(id: UUID): TodoTaskResponse
+
+    /**
+     * Takes a [TodoTaskRequest] as parameter and creates a new [TodoTask]-object.
      *
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
     fun createNewTodoTask(todoRequest: TodoTaskRequest): TodoTaskResponse
+
+    /**
+     * Takes an [id] and a [todoTaskRequest] as parameter and updates an existing [TodoTask]-object associated by the id.
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun updateExistingTodoTask(id: UUID, todoTaskRequest: TodoTaskRequest): TodoTaskResponse
+
+    /**
+     * Takes an [id] as parameter and deletes an existing [TodoTask]-object associated by the id.
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun deleteExistingTodoTask(id: UUID): TodoTaskResponse
 }

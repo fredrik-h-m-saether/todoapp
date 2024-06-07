@@ -1,5 +1,3 @@
-
-
 build:
 	mvn clean install
 

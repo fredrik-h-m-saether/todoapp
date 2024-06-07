@@ -1,6 +1,7 @@
 package com.example.tododemo.application
 
 import com.example.tododemo.domain.model.TodoTask
+import java.util.UUID
 
 /**
  * The Service class on the application layer orchestrates the use cases.
@@ -24,10 +25,35 @@ interface TodoTaskService {
     fun getListOfTodoTasks(): List<TodoTask>
 
     /**
-     * Creates a new [TodoTask]-object.
+     * Retrieves an existing [TodoTask]-object associated by [id].
      *
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
-    fun createNewTodoTask(title: String, description: String): TodoTask
+    fun getTodoTask(id: UUID): TodoTask
+
+
+    /**
+     * Creates a new [TodoTask]-object with [title] and [description] as values.
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun createNewTodoTask(title: String?, description: String?): TodoTask
+
+    /**
+     * Updates an existing [TodoTask]-object associated by [id] with [title] and [description] as values.
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun updateExistingTodoTask(id: UUID, title: String?, description: String?): TodoTask
+
+    /**
+     * Deletes an existing [TodoTask]-object associated by [id].
+     *
+     * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
+     *      User story - Get list of TODOs</a>
+     */
+    fun deleteExistingTodoTask(id: UUID): TodoTask
 }

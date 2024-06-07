@@ -19,4 +19,12 @@ import java.util.UUID
  * @see <a href="https://www.baeldung.com/hexagonal-architecture-ddd-spring">
  *      Organizing Layers Using Hexagonal Architecture, DDD and Spring</a>
  */
-data class TodoTask(val id: UUID, val title: String, val description: String, val status: Status)
+data class TodoTask(val id: UUID, val title: String?, val description: String?, val status: Status) {
+
+    fun updateTodoTask(title: String?, description: String?): TodoTask {
+        return this.copy(
+            title = title ?: this.title,
+            description = description ?: this.description
+        )
+    }
+}

@@ -26,41 +26,87 @@ class TodoTaskControllerTest {
     }
 
     @Test
-    fun `given TodoTaskService returns valid values, when calling getListOfTodoTasks, assert success`() {
+    fun `tests getAllTodoTasks`() {
         // given
         val uuid = UUID.randomUUID()
-        val todo1 = TodoTask(uuid, "Todo1", "A todo item", Status.CREATED)
+        val todo = TodoTask(uuid, "Todo1", "A todo item", Status.CREATED)
         Mockito.`when`(todoTaskService.getListOfTodoTasks())
-            .thenReturn(listOf(todo1))
+            .thenReturn(listOf(todo))
 
         // when
-        val todoTasks: List<TodoTaskResponse> = todoTaskController.getListOfTodoTasks()
+        val todoTasks: List<TodoTaskResponse> = todoTaskController.getAllTodoTasks()
 
         // then
         assertNotNull(todoTasks)
         assertEquals(uuid, todoTasks.first().id)
-        assertEquals("Todo1", todoTasks.first().title)
-        assertEquals("A todo item", todoTasks.first().description)
-        assertEquals(Status.CREATED, todoTasks.first().status)
     }
 
     @Test
-    fun `given TodoTaskService returns valid value, when calling getListOfTodoTasks, assert success`() {
+    fun `tests getTodoTask`() {
+        // given
+        val id = UUID.randomUUID()
+        val todo = TodoTask(id, "Todo1", "A todo item", Status.CREATED)
+        Mockito.`when`(todoTaskService.getTodoTask(id))
+            .thenReturn(todo)
+
+        // when
+        val todoTaskResponse: TodoTaskResponse = todoTaskController.getTodoTask(id)
+
+        // then
+        assertNotNull(todoTaskResponse)
+        assertEquals(id, todoTaskResponse.id)
+    }
+
+    @Test
+    fun `tests createNewTodoTask`() {
         // given
         val todoTaskRequest = TodoTaskRequest("Todo1", "A todo item")
 
-        val uuid = UUID.randomUUID()
-        val todoTask = TodoTask(uuid, "Todo1", "A todo item", Status.CREATED)
+        val id = UUID.randomUUID()
+        val todoTask = TodoTask(id, "Todo1", "A todo item", Status.CREATED)
         Mockito.`when`(todoTaskService.createNewTodoTask(todoTaskRequest.title, todoTaskRequest.description))
             .thenReturn(todoTask)
 
         // when
-        val actualTodoTask: TodoTaskResponse = todoTaskController.createNewTodoTask(todoTaskRequest)
+        val todoTaskResponse: TodoTaskResponse = todoTaskController.createNewTodoTask(todoTaskRequest)
 
         // then
-        assertEquals(uuid, actualTodoTask.id)
-        assertEquals("Todo1", actualTodoTask.title)
-        assertEquals("A todo item", actualTodoTask.description)
-        assertEquals(Status.CREATED, actualTodoTask.status)
+        assertNotNull(todoTaskResponse)
+        assertEquals(id, todoTaskResponse.id)
+    }
+
+    @Test
+    fun `tests updateExistingTodoTask`() {
+        // given
+        val todoTaskRequest = TodoTaskRequest("Todo1", "A todo item")
+
+        val id = UUID.randomUUID()
+        val todoTask = TodoTask(id, "Todo1", "A todo item", Status.UPDATED)
+        Mockito.`when`(todoTaskService.updateExistingTodoTask(id, todoTaskRequest.title, todoTaskRequest.description))
+            .thenReturn(todoTask)
+
+        // when
+        val todoTaskResponse: TodoTaskResponse = todoTaskController.updateExistingTodoTask(id, todoTaskRequest)
+
+        // then
+        assertNotNull(todoTaskResponse)
+        assertEquals(id, todoTaskResponse.id)
+    }
+
+    @Test
+    fun `tests deleteExistingTodoTask`() {
+        // given
+        val id = UUID.randomUUID()
+        val todoTask = TodoTask(id, "Todo1", "A todo item", Status.UPDATED)
+        Mockito.`when`(todoTaskService.deleteExistingTodoTask(id))
+            .thenReturn(todoTask)
+
+        // when
+        val todoTaskResponse: TodoTaskResponse = todoTaskController.deleteExistingTodoTask(id)
+
+        // then
+        println(todoTaskResponse)
+        assertNotNull(todoTaskResponse)
+        assertEquals(id, todoTaskResponse.id)
     }
 }

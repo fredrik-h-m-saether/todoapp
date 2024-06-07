@@ -13,6 +13,9 @@ package com.example.tododemo.domain.enums
  */
 enum class Status {
     CREATED,
+    DELETED,
+    DONE,
     IN_PROGRESS,
-    DONE
+    READY,
+    UPDATED
 }
