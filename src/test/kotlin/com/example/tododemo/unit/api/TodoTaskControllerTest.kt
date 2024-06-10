@@ -78,11 +78,11 @@ class TodoTaskControllerTest {
     @Test
     fun `tests updateExistingTodoTask`() {
         // given
-        val todoTaskRequest = TodoTaskRequest("Todo1", "A todo item")
+        val todoTaskRequest = TodoTaskRequest("Todo1", "A todo item", Status.UPDATED)
 
         val id = UUID.randomUUID()
-        val todoTask = TodoTask(id, "Todo1", "A todo item", Status.UPDATED)
-        Mockito.`when`(todoTaskService.updateExistingTodoTask(id, todoTaskRequest.title, todoTaskRequest.description))
+        val todoTask = TodoTask(id, "Todo1", "A todo item", Status.READY)
+        Mockito.`when`(todoTaskService.updateExistingTodoTask(id, todoTaskRequest.title, todoTaskRequest.description, todoTaskRequest.status))
             .thenReturn(todoTask)
 
         // when

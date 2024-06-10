@@ -1,5 +1,6 @@
 package com.example.tododemo.application
 
+import com.example.tododemo.domain.enums.Status
 import com.example.tododemo.domain.model.TodoTask
 import java.util.UUID
 
@@ -42,12 +43,12 @@ interface TodoTaskService {
     fun createNewTodoTask(title: String?, description: String?): TodoTask
 
     /**
-     * Updates an existing [TodoTask]-object associated by [id] with [title] and [description] as values.
+     * Updates an existing [TodoTask]-object associated by [id] with [title] (opt.), [description] (opt.) and [status] (opt.) as values.
      *
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
-    fun updateExistingTodoTask(id: UUID, title: String?, description: String?): TodoTask
+    fun updateExistingTodoTask(id: UUID, title: String?, description: String?, status: Status?): TodoTask
 
     /**
      * Deletes an existing [TodoTask]-object associated by [id].

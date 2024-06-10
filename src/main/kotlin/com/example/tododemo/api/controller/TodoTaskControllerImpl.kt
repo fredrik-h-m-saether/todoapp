@@ -42,7 +42,7 @@ class TodoTaskControllerImpl(private val todoTaskService: TodoTaskService) : Tod
     @PutMapping(value = ["/todo"])
     override fun updateExistingTodoTask(@RequestParam id: UUID, @RequestBody todoTaskRequest: TodoTaskRequest): TodoTaskResponse {
         logger.info("HTTP UPDATE /api/v1/todo - ID={}", id)
-        return todoTaskService.updateExistingTodoTask(id, todoTaskRequest.title, todoTaskRequest.description).let {
+        return todoTaskService.updateExistingTodoTask(id, todoTaskRequest.title, todoTaskRequest.description, todoTaskRequest.status).let {
             TodoTaskMapper.domainToTodoTaskResponse(it)
         }
     }

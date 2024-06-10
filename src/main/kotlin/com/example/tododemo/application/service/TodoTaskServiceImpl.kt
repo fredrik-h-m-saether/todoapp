@@ -2,7 +2,6 @@ package com.example.tododemo.application.service
 
 import com.example.tododemo.application.TodoTaskService
 import com.example.tododemo.domain.enums.Status
-import com.example.tododemo.domain.exceptions.TodoTaskNotFoundException
 import com.example.tododemo.domain.model.TodoTask
 import com.example.tododemo.domain.repository.TodoTaskRepository
 import org.slf4j.Logger
@@ -22,7 +21,6 @@ class TodoTaskServiceImpl(val todoTaskRepository: TodoTaskRepository) : TodoTask
     override fun getTodoTask(id: UUID): TodoTask {
         logger.debug("Retrieving a Todo task with id={}", id)
         return todoTaskRepository.findById(id)
-            ?: throw TodoTaskNotFoundException("Todo task with id=$id not found")
     }
 
     override fun createNewTodoTask(title: String?, description: String?): TodoTask {
@@ -33,18 +31,16 @@ class TodoTaskServiceImpl(val todoTaskRepository: TodoTaskRepository) : TodoTask
         return newTodoTask
     }
 
-    override fun updateExistingTodoTask(id: UUID, title: String?, description: String?): TodoTask {
+    override fun updateExistingTodoTask(id: UUID, title: String?, description: String?, status: Status?): TodoTask {
         logger.debug("Updating an existing Todo task with id={}", id)
         val existingTodoTask = todoTaskRepository.findById(id)
-            ?: throw TodoTaskNotFoundException("Todo task with id=$id not found")
-        val todoTaskToBeUpdated = existingTodoTask.updateTodoTask(title, description)
+        val todoTaskToBeUpdated = existingTodoTask.updateTodoTask(title, description, status)
         return todoTaskRepository.update(id, todoTaskToBeUpdated)
     }
 
     override fun deleteExistingTodoTask(id: UUID): TodoTask {
         logger.debug("Deleting an existing Todo task associated by id={}", id)
         val todoTaskToBeDeleted: TodoTask = todoTaskRepository.findById(id)
-            ?: throw TodoTaskNotFoundException("Todo task with id=$id not found")
         return todoTaskRepository.delete(id, todoTaskToBeDeleted)
     }
 }

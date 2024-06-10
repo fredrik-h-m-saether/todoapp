@@ -1,0 +1,12 @@
+spring:
+    config:
+        activate:
+            on-profile: test
+    datasource:
+        url: jdbc:postgresql://localhost:5432/todo_db
+        username: postgres
+        password: example
+        driver-class-name: org.postgresql.Driver
+logging:
+    level:
+        org.springframework.boot.web: DEBUG

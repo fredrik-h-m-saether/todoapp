@@ -66,7 +66,7 @@ class TodoTaskServiceTest {
         val id: UUID = UUID.randomUUID()
         val todoTask = TodoTask(id, "Todo1", "A todo item", Status.READY)
         Mockito.`when`(todoTaskRepository.findById(id))
-            .thenReturn(null)
+            .thenThrow(TodoTaskNotFoundException("Todo task with id=$id not found"))
 
         // when
         val exception: TodoTaskNotFoundException = assertThrows {
@@ -111,7 +111,7 @@ class TodoTaskServiceTest {
             .thenReturn(todoTask)
 
         // when
-        val actualTodoTask: TodoTask = todoTaskService.updateExistingTodoTask(id, title, description)
+        val actualTodoTask: TodoTask = todoTaskService.updateExistingTodoTask(id, title, description, Status.UPDATED)
 
         // then
         assertNotNull(actualTodoTask)
@@ -123,11 +123,11 @@ class TodoTaskServiceTest {
         // given
         val id: UUID = UUID.randomUUID()
         Mockito.`when`(todoTaskRepository.findById(id))
-            .thenReturn(null)
+            .thenThrow(TodoTaskNotFoundException("Todo task with id=$id not found"))
 
         // when
         val exception: TodoTaskNotFoundException = assertThrows {
-            todoTaskService.updateExistingTodoTask(id, null, null)
+            todoTaskService.updateExistingTodoTask(id, null, null, null)
         }
 
         // then
@@ -159,7 +159,7 @@ class TodoTaskServiceTest {
         // given
         val id: UUID = UUID.randomUUID()
         Mockito.`when`(todoTaskRepository.findById(id))
-            .thenReturn(null)
+            .thenThrow(TodoTaskNotFoundException("Todo task with id=$id not found"))
 
         // when
         val exception: TodoTaskNotFoundException = assertThrows {

@@ -38,11 +38,12 @@ interface TodoTaskRepository {
     /**
      * Retrieves a single [TodoTask]-object associated by [id].
      *
-     * @throws TodoTaskNotFoundException if the [TodoTask]-object associated by [id] is not found.
+     * @throws TodoTaskNotFoundException if the [TodoTask]-object associated by [id] was not found.
      * @see <a href="https://journit.atlassian.net/wiki/spaces/~63d512d64a3c3294ac05bb66/pages/7667713/TodoApp+-+Get+list+of+TODOs">
      *      User story - Get list of TODOs</a>
      */
-    fun findById(id: UUID): TodoTask?
+    @Throws(TodoTaskNotFoundException::class)
+    fun findById(id: UUID): TodoTask
 
     /**
      * Creates a new [TodoTask].

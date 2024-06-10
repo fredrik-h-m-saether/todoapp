@@ -6,11 +6,6 @@ import java.util.UUID
 /**
  * The [TodoTask] class is the domain model of our application.
  *
- * @property id En unik ID for [TodoTask].
- * @property title En tittel for [TodoTask].
- * @property title En beskrivelse av [TodoTask].
- * @property status En [Status] for [TodoTask].
- *
  * @author Øystein Opedal
  * @since 0.0.1
  * @see <a href="https://github.com/fredrik-h-m-saether/todoapp">Github - TodoApp</a>
@@ -21,10 +16,11 @@ import java.util.UUID
  */
 data class TodoTask(val id: UUID, val title: String?, val description: String?, val status: Status) {
 
-    fun updateTodoTask(title: String?, description: String?): TodoTask {
+    fun updateTodoTask(title: String?, description: String?, status: Status?): TodoTask {
         return this.copy(
             title = title ?: this.title,
-            description = description ?: this.description
+            description = description ?: this.description,
+            status = status ?: this.status
         )
     }
 }
